@@ -5,8 +5,9 @@ const router = express.Router()
 
 router.get("/api/:date" , function(req,res){
     const date = req.params.date;
+    if(parseInt(date)){return res.send({"error" : "Inavlid Date"})}
     let formatdate = new Date(parseInt(date)).toUTCString();
-    if(formatdate === "Invalid Date"){return res.status(401).send({"error" : "Inavlid Date"})}
+    if(formatdate === "Invalid Date"){return res.send({"error" : "Inavlid Date"})}
     console.log(formatdate);
     const result = {
         "unix" : date,
